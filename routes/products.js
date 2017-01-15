@@ -10,6 +10,9 @@ router.get('/', (req, res) => {
   res.render('index', productDB.getAllProducts());
 })
 
+router.get('/:id', (req, res) => {
+  res.render('products', productDB.getProduct(parseInt(req.params.id)));
+})
 
 router.post('/', (req, res, next) => {
   console.log('okay im working')
@@ -19,7 +22,7 @@ router.post('/', (req, res, next) => {
     productObj.name = req.body.name;
     productObj.price = req.body.price;
     productObj.inventory = req.body.inventory;
-    console.log(productObj);
+    /*console.log(productObj);*/
     productDB.add(productObj);
     id++;
     }
@@ -27,7 +30,20 @@ router.post('/', (req, res, next) => {
   });
 
 router.put('/:id', (req, res, next) => {
-
+  console.log('okay its time to WORK');
+  let newValues = req.body;
+  let product = productDB.getProduct(parseInt(req.params.id));
+  /*console.log(product);*/
+  if(newValues.hasOwnProperty('name')){
+    product.name = newValues.name;
+  }
+  if(newValues.hasOwnProperty('price')){
+    product.price = newValues.price;
+  }
+  if(newValues.hasOwnProperty('inventory')){
+    product.inventory = newValues.inventory;
+  }
+  res.redirect(303, '/products/' + req.params.id);
 })
 
 router.delete('/:id', (req, res, next) => {
