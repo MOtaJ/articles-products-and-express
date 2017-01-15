@@ -20,12 +20,22 @@ function getProduct(idInput){
   return null;
 }
 
+function deleteItem(idInput){
+  for(let i = 0; i < productList.products.length; i++){
+    if(productList.products[i].id === idInput){
+      productList.products.splice(productList.products.indexOf(productList.products[i], 1));
+    };
+  };
+  return null;
+}
+
 module.exports = {
 
   getAllProducts: getAllProducts,
   add: add,
-  edit: edit,
-  getProduct: getProduct
+  getProduct: getProduct,
+  deleteItem: deleteItem
+
 }
 
 

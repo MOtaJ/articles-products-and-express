@@ -46,8 +46,11 @@ router.put('/:id', (req, res, next) => {
   res.redirect(303, '/products/' + req.params.id);
 })
 
-router.delete('/:id', (req, res, next) => {
 
+router.delete('/:id', (req, res, next) => {
+  productDB.deleteItem(parseInt(req.params.id));
+  res.redirect(303, '/products');
 })
+
 
 module.exports = router;
