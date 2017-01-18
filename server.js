@@ -5,6 +5,7 @@ const products = require('./routes/products');
 const articles = require('./routes/articles');
 const bodyParser = require('body-parser');
 const displayProduct = require('./db/products');
+const displayArticles = require('./db/articles');
 
 /*console.log(products)
 */
@@ -15,8 +16,10 @@ const hbs = handlebars.create({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
 app.use('/products', products);
-/*app.use('/routes/articles.js', articles);*/
+
+app.use('/articles', articles);
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');

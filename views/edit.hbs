@@ -1,0 +1,7 @@
+<form action = "/products/{{productList.products.id}}/?_method=PUT" method="POST">
+  <input type="hidden"name="{{req.body.id}}" ><br>
+  <h1>Name: <br></h1> <input type="text" name = "{{req.body.name}}"><br>
+  <h2>Price: <br></h2> <input type="text" name = "{{req.body.price}}"><br>
+  <h2>Inventory: <br></h2> <input type="text" name = "{{req.body.inventory}}"><br>
+  <input type="submit" value = "submit">
+</form>

@@ -1,17 +1,25 @@
-const express = require('express')
-const router = express('router')
-const productDB = require('../db/products')
+const express = require('express');
+const router = express('router');
+const productDB = require('../db/products');
 
 let id = 0;
-
 
 router.get('/', (req, res) => {
   console.log(productDB.getAllProducts());
   res.render('index', productDB.getAllProducts());
 })
 
+router.get('/new', (req, res) => {
+  console.log("sdkjsvkjnsvksvknj");
+    res.render('new');
+})
+
 router.get('/:id', (req, res) => {
   res.render('products', productDB.getProduct(parseInt(req.params.id)));
+})
+
+router.get('/:id/edit', (req, res) => {
+  res.render('edit');
 })
 
 router.post('/', (req, res, next) => {
