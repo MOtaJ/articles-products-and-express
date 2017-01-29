@@ -1,7 +1,16 @@
-<form action = "/products/{{productList.products.id}}/?_method=PUT" method="POST">
-  <input type="hidden"name="{{req.body.id}}" ><br>
-  <h1>Name: <br></h1> <input type="text" name = "{{req.body.name}}"><br>
-  <h2>Price: <br></h2> <input type="text" name = "{{req.body.price}}"><br>
-  <h2>Inventory: <br></h2> <input type="text" name = "{{req.body.inventory}}"><br>
+<form action = "/products/{{id}}?_method=PUT" method="POST">
+  <input type="hidden"name="id" ><br>
+  <h1>Name: <br></h1> <input type="text" name = "name" placeholder = {{name}}><br>
+  <h2>Price: <br></h2> <input type="text" name = "price" placeholder = {{price}}><br>
+  <h2>Inventory: <br></h2> <input type="text" name = "inventory" placeholder = {{inventory}}><br>
+  <input type="submit" value = "submit">
+</form>
+
+<form action = "/products/{{titleUrl}}?_method=PUT" method="POST">
+  <input type="hidden"name="id" ><br>
+  <h1>Title: <br></h1> <input type="text" name = "title" placeholder = {{title}}><br>
+  <h2>Body: <br></h2> <input type="text" name = "body" placeholder = {{body}}><br>
+  <h2>Author: <br></h2> <input type="text" name = "author" placeholder = {{author}}><br>
+  <h2>TitleUrl: <br></h2> <input type="text" name = "titleUrl" placeholder = {{titleUrl}}>
   <input type="submit" value = "submit">
 </form>

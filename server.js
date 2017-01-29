@@ -6,6 +6,7 @@ const articles = require('./routes/articles');
 const bodyParser = require('body-parser');
 const displayProduct = require('./db/products');
 const displayArticles = require('./db/articles');
+const methodOverride = require('method-override');
 
 /*console.log(products)
 */
@@ -16,6 +17,8 @@ const hbs = handlebars.create({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(methodOverride('_method'));
 
 app.use('/products', products);
 
