@@ -14,7 +14,6 @@ const db = pgp({
 router.get('/', (req, res) => {
   articlesModel.getAllArticles()
   .then(articles => {
-    console.log(articles);
       res.render('index', {articles: articles})
   });
 });
@@ -25,16 +24,16 @@ router.get('/new', (req, res) => {
 
 router.get('/:title', (req, res) => {
   /*res.render('articles', articleDB.getProduct(req.params.titleUrl));*/
-  articlesModel.getArticleByUrl(req.params.titleUrl)
+  articlesModel.getArticleByUrl(req.params.title)
   .then(articles => {
-    res.render('articles')
+    res.render('articles', articles)
   })
 })
 
 router.get('/:title/edit', (req, res) => {
-  articlesModel.getArticleByUrl(req.params.titleUrl)
+  articlesModel.getArticleByUrl(req.params.title)
   .then(articles => {
-    res.render('articles', article);
+    res.render('edit_articles', article);
   });
 })
 
@@ -51,21 +50,17 @@ router.post('/', (req, res) => {
   res.redirect('/articles');*/
   let newArticle = req.body;
   if(newArticle.hasOwnProperty('title') && newArticle.hasOwnProperty('body') && newArticle.hasOwnProperty('author') && newArticle.title !== '' && newArticle.body !== '' && newArticle.author !== ''){
-    db.none(`INSERT INTO articles (title, body, author) VALUES ('${newArticle.title}', ${newArticle.body}, ${newArticle.author})`)
+    db.none(`INSERT INTO articles (title, body, author, urlTitle) VALUES ('${newArticle.title}', '${newArticle.body}', '${newArticle.author}', '${encodeURIComponent(newArticle.title)}')`)
     .then(function() {
-      console.log('article post works');
-      res.redirect('/articles')
+      res.redirect(`/articles/${encodeURIComponent(newArticle.title)}`);
     })
-    .catch(function(error) {
-      console.log('it didnt fucking work again')
-      res.redirect('/articles')
-    });
+
   }
 });
 
-router.put('/:title', (req, res) => {
+router.put('/:title', (req, res, next) => {
   let newValues = req.body;
-  let article = articleDB.getArticle(req.params.title);
+  /*let article = articleDB.getArticle(req.params.title);
   if(newValues.hasOwnProperty('title')){
     article.title = newValues.title;
   }
@@ -76,7 +71,15 @@ router.put('/:title', (req, res) => {
     article.author = newValues.author;
   }
   res.redirect(303, '/articles/'+ req.params.titleUrl);
-})
+})*/
+  db.none(`UPDATE articles
+    SET title = '${newValues.title}',
+    body = ${newValues.body},
+    author = ${newValues.author}
+    WHERE title = ${req.params.title}`);
+    res.redirect(303, '/edit_articles/' + req.params.title)
+});
+
 
 router.delete('/:title', (req, res) => {
   articleDB.deleteArticle(req.params.title);

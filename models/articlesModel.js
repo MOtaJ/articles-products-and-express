@@ -13,12 +13,12 @@ function getAllArticles(){
 }
 
 
-function getArticleByUrl(titleUrl){
-  return db.one(`SELECT * FROM articles WHERE titleUrl = ${titleUrl}`)
+function getArticleByUrl(title){
+  return db.one(`SELECT * FROM articles WHERE title = ${title}`)
 };
 
-function deleteItem(titleUrl){
-  return db.none(`DELETE FROM articles WHERE titleUrl = ${titleUrl}`)
+function deleteItem(urlTitle){
+  return db.none(`DELETE FROM articles WHERE title = ${title}`)
 };
 
 module.exports = {

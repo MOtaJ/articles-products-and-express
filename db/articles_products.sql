@@ -14,9 +14,10 @@ CREATE TABLE products(
 
 DROP TABLE IF EXISTS articles;
 CREATE TABLE articles(
-  title varchar(90) PRIMARY KEY NOT NULL,
-  body varchar(180) DEFAULT NULL,
-  author varchar(90) DEFAULT NULL,
-  titleURL varchar(180) DEFAULT NULL
+  id serial PRIMARY KEY NOT NULL,
+  title text DEFAULT NULL,
+  body text DEFAULT NULL,
+  author text DEFAULT NULL,
+  urlTitle text DEFAULT NULL
 );
 
